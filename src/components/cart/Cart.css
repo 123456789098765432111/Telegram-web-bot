@@ -1,0 +1,7 @@
+.cart_countener{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+  gap: 20px;
+}
