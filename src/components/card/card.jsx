@@ -14,7 +14,7 @@ const Card = (props) => {
   }
   return (
     <>
-     <div className="card w-96 bg-base-100 shadow-xl">
+     <div className="card w-96 bg-base-100 shadow-xl" style={{ backgroundColor: "#222"}}>
       <span className={` ${count !== 0 ? 'card_badge':"card_badge-hidden"}`}>{count}</span>
      <figure style={{padding:"20px"}} className='img_1'>
        <img src={course.Image} alt={course.title} style={{borderRadius:"20px"}}/>
