@@ -35,13 +35,32 @@ const App = () => {
     telegram.MainButton.show()
   }
 
-  const onSendata  = useCallback(()=>{
-    telegram.senData(JSON.stringify(cartItems))
-  },[cartItems])
-  useEffect(()=>{
-    telegram.onEvent('mainButtonClicked',onSendata)
-    return ()=> telegram.offEvent('mainButtonClicked',onSendata)
-  },[onSendata])
+  const onSendData = useCallback(() => {
+		const queryID = telegram.initDataUnsafe?.query_id;
+
+		if (queryID) {
+			fetch(
+				'http://localhost:8000/web-data',
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+					cartItems
+					}),
+				}
+			);
+		} else {
+			telegram.sendData(JSON.stringify(cartItems));
+		}
+	}, [cartItems]);
+
+	useEffect(() => {
+		telegram.onEvent('mainButtonClicked', onSendData);
+
+		return () => telegram.offEvent('mainButtonClicked', onSendData);
+	}, [onSendData]);
 
   return (
     <>
